@@ -11,18 +11,25 @@ public class mainGUIController {
     private Label welcomeText;
 
     @FXML
-    public void onSendButtonClick() {
+    public void onSendButtonClick(ActionEvent actionEvent) {
         //int i = 1;
-        SerialPort comPort = SerialPort.getCommPort("COM7");
+        SerialPort comPort = SerialPort.getCommPort("COM6");
         comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
         comPort.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING,0,0);
 
         comPort.openPort();
-        comPort.writeBytes("h".getBytes(), "h".length());
+        comPort.writeBytes("s".getBytes(), "s".length());
         comPort.closePort();
     }
 
     public void onStopButtonClick(ActionEvent actionEvent) {
+        SerialPort comPort = SerialPort.getCommPort("COM6");
+        comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
+        comPort.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING,0,0);
+
+        comPort.openPort();
+        comPort.writeBytes("t".getBytes(), "t".length());
+        comPort.closePort();
     }
 
     public void onPauseButtonClick(ActionEvent actionEvent) {

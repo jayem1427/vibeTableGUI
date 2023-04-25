@@ -4,8 +4,11 @@ const int pwmPin = 2;
 // Variables for timing
 unsigned long previousMillis = 0; // Stores the previous time
 unsigned long intervalOn = 5000; // Default interval for ON time in milliseconds (5 seconds)
-unsigned long intervalOff = 7000; // Default interval for OFF time in milliseconds (7 seconds)
-int dutyCycle = 80; // Default Duty cycle in percentage (80%)
+unsigned long intervalOff = 2000; // Default interval for OFF time in milliseconds (2 seconds)
+int dutyCycle = 90; // Default Duty cycle in percentage (80%)
+
+// flag to start signal
+boolean flagPWM = true; 
 
 // Function to generate PWM signal
 void generatePWM(unsigned long onTime, unsigned long offTime, int duty) {
@@ -36,6 +39,7 @@ void generatePWM(unsigned long onTime, unsigned long offTime, int duty) {
 void setup() {
   // Set the PWM pin as an OUTPUT
   pinMode(pwmPin, OUTPUT);
+  pinMode(13,OUTPUT);
   Serial.begin(9600);
 }
 
@@ -44,9 +48,27 @@ void loop() {
   // check if the arduino is receiving serial data
   if (Serial.available() > 0) {
     byte incomingByte = Serial.read();  // make a new variable for serial data
-    if (incomingByte == "start"){
+
+    if (incomingByte == "s"){
         // Call the generatePWM function with specified parameters
-        generatePWM(intervalOn, intervalOff, dutyCycle);
+        digitalWrite(13,HIGH);
+        flagPWM = false;   
     }
+    if (incomingByte == "t") {
+        // Turn off the PWM signaling
+        digitalWrite(13,LOW);
+        flagPWM = true;
+    }    
   }
+
+  if (flagPWM) {
+    generatePWM(intervalOn, intervalOff, dutyCycle);
+    //digitalWrite(13,HIGH);
+
+  } else {
+    analogWrite(pwmPin, 0) ;   
+    //digitalWrite(13,LOW);
+  }
+  
+
 }

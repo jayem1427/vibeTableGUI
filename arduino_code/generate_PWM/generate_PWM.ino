@@ -4,11 +4,13 @@ const int pwmPin = 2;
 // Variables for timing
 unsigned long previousMillis = 0; // Stores the previous time
 unsigned long intervalOn = 5000; // Default interval for ON time in milliseconds (5 seconds)
-unsigned long intervalOff = 2000; // Default interval for OFF time in milliseconds (2 seconds)
+unsigned long intervalOff = 1000; // Default interval for OFF time in milliseconds (2 seconds)
 int dutyCycle = 90; // Default Duty cycle in percentage (80%)
+String incomingByte;
+boolean flagPWM = false; 
+char incomingChar;
 
 // flag to start signal
-boolean flagPWM = true; 
 
 // Function to generate PWM signal
 void generatePWM(unsigned long onTime, unsigned long offTime, int duty) {
@@ -39,36 +41,46 @@ void generatePWM(unsigned long onTime, unsigned long offTime, int duty) {
 void setup() {
   // Set the PWM pin as an OUTPUT
   pinMode(pwmPin, OUTPUT);
-  pinMode(13,OUTPUT);
+  pinMode(12,OUTPUT);
+  pinMode(11,OUTPUT);
   Serial.begin(9600);
+
 }
 
 // this section loops indefinitely
 void loop() {
-  // check if the arduino is receiving serial data
+  // check if the arduino is receiving serial data  
+  Serial.println(incomingByte);
   if (Serial.available() > 0) {
-    byte incomingByte = Serial.read();  // make a new variable for serial data
-
-    if (incomingByte == "s"){
+    // Serial.readBytes(incomingByte, 10);  // make a new variable for serial data
+    // incomingByte = Serial.readString();
+    incomingChar = Serial.read();
+    //Serial.println(flagPWM);
+    
+    if (incomingChar == 's'){
         // Call the generatePWM function with specified parameters
-        digitalWrite(13,HIGH);
-        flagPWM = false;   
+        flagPWM = true;   
     }
-    if (incomingByte == "t") {
+    
+    else {
         // Turn off the PWM signaling
-        digitalWrite(13,LOW);
-        flagPWM = true;
-    }    
-  }
+        flagPWM = false;
+    }   
+
+  } 
+
 
   if (flagPWM) {
     generatePWM(intervalOn, intervalOff, dutyCycle);
-    //digitalWrite(13,HIGH);
-
-  } else {
-    analogWrite(pwmPin, 0) ;   
-    //digitalWrite(13,LOW);
+    digitalWrite(11,HIGH);
+    digitalWrite(12,LOW);
   }
+  else if (flagPWM == false) {
+    generatePWM(0, 0, 0);
+    digitalWrite(11,LOW);
+    digitalWrite(12,HIGH);
+  }
+
   
 
 }

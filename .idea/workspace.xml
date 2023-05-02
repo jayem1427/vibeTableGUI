@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e8897d2-cc53-49a6-84df-03668606ed26" name="Changes" comment="inital commit">
+    <list default="true" id="5e8897d2-cc53-49a6-84df-03668606ed26" name="Changes" comment="updated PWM">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/vibetablegui/mainGUI_test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arduino_code/generate_PWM/generate_PWM.ino" beforeDir="false" afterPath="$PROJECT_DIR$/arduino_code/generate_PWM/generate_PWM.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/vibetablegui/mainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/vibetablegui/mainGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/vibetablegui/mainGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/vibetablegui/mainGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/vibetablegui/mainGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/vibetablegui/mainGUI.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +18,24 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="175a4bba-a0fa-4837-84b5-8669f622cdc5" />
+        <option name="url" value="git@github.com:jayem1427/vibeTableGUI.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2OqaO87FC008QPlhT2wWfVYN5Mu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -34,9 +54,15 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/jonat/Downloads/jSerialComm-2.9.3.jar&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.vibetablegui" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -53,12 +79,20 @@
       <option name="project" value="LOCAL" />
       <updated>1682293013138</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="updated PWM">
+      <created>1682383302631</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682383302631</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="inital commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="inital commit" />
+    <MESSAGE value="updated PWM" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated PWM" />
   </component>
 </project>

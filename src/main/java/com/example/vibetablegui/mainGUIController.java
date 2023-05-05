@@ -5,36 +5,53 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import com.fazecast.jSerialComm.*;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.ChoiceBox;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 
 import static com.example.vibetablegui.mainGUI.comPort;
 
-public class mainGUIController {
-    @FXML
-    private Label welcomeText;
+public class mainGUIController implements Initializable {
+
     static OutputStream outputStream;
 
-    @FXML
-    public void onSendButtonClick(ActionEvent actionEvent) throws Exception {
-//        String s = "s";
-//        comPort.writeBytes(s.getBytes("UTF8"), s.length());
-//        System.out.println(comPort.writeBytes(s.getBytes(), s.length()));
-        OutputStream outputStream1 = comPort.getOutputStream();
-        outputStream1.write('s');
-        outputStream1.flush();
-    }
-
-    public void onStopButtonClick(ActionEvent actionEvent) {
-//        SerialPort comPort = SerialPort.getCommPort("COM3");
-//        comPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
-//        comPort.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING,0,0);
-
-//        comPort.openPort();
-        comPort.writeBytes("t".getBytes(), "t".length());
+    public void onStopButtonClick(ActionEvent actionEvent) throws IOException {
+        OutputStream outputStream2 = comPort.getOutputStream();
+        outputStream2.write('t');
+        outputStream2.flush();
     }
 
     public void onPauseButtonClick(ActionEvent actionEvent) {
     }
+
+    @FXML
+    private ChoiceBox<String> myChoiceBox;
+
+    private String[] direction = {"Forward","Backward"};
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        myChoiceBox.getItems().addAll(direction);
+        myChoiceBox.setValue("Forward");
+    }
+
+    @FXML
+    public void onSendButtonClick(ActionEvent actionEvent) throws Exception {
+        OutputStream outputStream1 = comPort.getOutputStream();
+        //outputStream1.write('s');
+        String dirString = myChoiceBox.getValue();
+        if (dirString == "Forward") {
+            outputStream1.write("sf".getBytes());
+        } else {
+            outputStream1.write("sb".getBytes());
+        }
+        outputStream1.flush();
+    }
+
 }

@@ -1,3 +1,14 @@
+/* generate_PWM.ino as of 5/2/2023
+the following code is used in the Cal Poly EMPS Vibration Table senior project. this code is uploaded to the Arduino Mega 
+and interfaces the UI and vibration table. 
+
+inputs from UI:
+start signal
+
+outputs to vibe table:
+vibration schedule
+
+*/
 // Pin number for PWM output
 const int pwmPin = 2;
 
@@ -6,7 +17,6 @@ unsigned long previousMillis = 0; // Stores the previous time
 unsigned long intervalOn = 5000; // Default interval for ON time in milliseconds (5 seconds)
 unsigned long intervalOff = 1000; // Default interval for OFF time in milliseconds (2 seconds)
 int dutyCycle = 90; // Default Duty cycle in percentage (80%)
-String incomingByte;
 boolean flagPWM = false; 
 char incomingChar;
 
@@ -31,10 +41,15 @@ void generatePWM(unsigned long onTime, unsigned long offTime, int duty) {
 
   // Check if it's time to update the PWM timing
   if (elapsedMillis >= onTime + offTime) {
-    // Update the previousMillis and intervalOff
+    // Update the previousMillis
     previousMillis = currentMillis;
-    intervalOff = offTime;
+    intervalOff = offTime; // this line is probably breaking functionality. check later
   }
+}
+
+// function to build schedules
+void buildSchedule(int intensity, unsigned long totalDuration, unsigned long onTime, unsigned long offTime, int duty){
+  //to do: call generatePWM() 
 }
 
 // use this section for initializing code
@@ -50,15 +65,12 @@ void setup() {
 // this section loops indefinitely
 void loop() {
   // check if the arduino is receiving serial data  
-  Serial.println(incomingByte);
   if (Serial.available() > 0) {
-    // Serial.readBytes(incomingByte, 10);  // make a new variable for serial data
-    // incomingByte = Serial.readString();
+    // assign the serial data to a variable
     incomingChar = Serial.read();
-    //Serial.println(flagPWM);
     
     if (incomingChar == 's'){
-        // Call the generatePWM function with specified parameters
+        // Turn on PWM signaling
         flagPWM = true;   
     }
     
@@ -75,8 +87,9 @@ void loop() {
     digitalWrite(11,HIGH);
     digitalWrite(12,LOW);
   }
+
   else if (flagPWM == false) {
-    generatePWM(0, 0, 0);
+    generatePWM(intervalOn, intervalOff, 0);
     digitalWrite(11,LOW);
     digitalWrite(12,HIGH);
   }
